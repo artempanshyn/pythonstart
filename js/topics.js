@@ -5,6 +5,22 @@ export function getTopicById(id) {
   return topics.find((topic) => topic.id === id);
 }
 
+function normalizeSearch(text) {
+  return text.normalize().toLocaleLowerCase("uk");
+}
+
+export function filterTopicsData(items, { filter = "all", searchQuery = "", completedTopics = [] } = {}) {
+  if (!Array.isArray(items)) return [];
+
+  const query = typeof searchQuery === "string" ? normalizeSearch(searchQuery.trim()) : "";
+  const completed = new Set(completedTopics);
+  return items.filter((topic) => {
+    const isCompleted = completed.has(topic.id);
+    if ((filter === "completed" && !isCompleted) || (filter === "pending" && isCompleted)) return false;
+    return normalizeSearch(`${topic.title} ${topic.description}`).includes(query);
+  });
+}
+
 export function renderTopicsCatalog(section, onSelectTopic) {
   const container = section.querySelector("#topics-grid");
   const search = section.querySelector("#topic-search-input");
@@ -43,28 +59,27 @@ export function renderTopicsCatalog(section, onSelectTopic) {
 
     card.append(step, title, description, status, link);
     fragment.append(card);
-    const searchText = `${topic.title} ${topic.description}`.normalize().toLocaleLowerCase("uk");
-    cards.set(topic.id, { card, status, link, searchText });
+    cards.set(topic.id, { card, status, link });
   }
 
   container.replaceChildren(fragment);
 
   function refreshCatalog() {
     const { activeTopicId, completedTopics } = progress;
-    const query = search.value.trim().normalize().toLocaleLowerCase("uk");
-    const filter = filters.querySelector("input:checked").value;
-    let visibleCount = 0;
+    const visibleTopics = filterTopicsData(topics, {
+      filter: filters.querySelector("input:checked").value,
+      searchQuery: search.value,
+      completedTopics,
+    });
+    const visibleIds = new Set(visibleTopics.map(({ id }) => id));
 
-    for (const [id, { card, status, link, searchText }] of cards) {
-      const complete = completedTopics.includes(id);
-      const matchesStatus = filter === "all" || (filter === "completed" ? complete : !complete);
-      card.hidden = !searchText.includes(query) || !matchesStatus;
-      if (!card.hidden) visibleCount++;
-      status.hidden = !complete;
+    for (const [id, { card, status, link }] of cards) {
+      card.hidden = !visibleIds.has(id);
+      status.hidden = !completedTopics.includes(id);
       if (id === activeTopicId) link.setAttribute("aria-current", "true");
       else link.removeAttribute("aria-current");
     }
-    empty.textContent = visibleCount ? "" : t("catalog.noMatches");
+    empty.textContent = visibleIds.size ? "" : t("catalog.noMatches");
   }
 
   search.addEventListener("input", refreshCatalog);

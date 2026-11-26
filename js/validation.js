@@ -1,12 +1,12 @@
-function normalizeAnswer(answer) {
+export function normalizeAnswer(answer) {
   // Дозволяємо горизонтальні пробіли у формах вправ цього набору.
-  return answer
+  return String(answer ?? "").trim()
     .replace(/^([A-Za-z_]\w*)[ \t]*=[ \t]*([+-]?\d+)$/, "$1=$2")
     .replace(/^([A-Za-z_]\w*)[ \t]*\([ \t]*([+-]?\d+)[ \t]*\)$/, "$1($2)");
 }
 
 export function validateExerciseAnswer(userInput, expectedAnswer) {
-  const input = String(userInput ?? "").trim();
+  const input = normalizeAnswer(userInput);
   if (input === "") {
     return {
       status: "empty",
@@ -15,8 +15,7 @@ export function validateExerciseAnswer(userInput, expectedAnswer) {
     };
   }
 
-  const expected = String(expectedAnswer ?? "").trim();
-  const isCorrect = normalizeAnswer(input) === normalizeAnswer(expected);
+  const isCorrect = input === normalizeAnswer(expectedAnswer);
   return {
     status: isCorrect ? "success" : "error",
     isCorrect,
