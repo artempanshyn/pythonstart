@@ -1,0 +1,105 @@
+:root {
+  --color-bg: #f8fafc;
+  --color-surface: #fff;
+  --color-text: #0f172a;
+  --color-muted: #475569;
+  --color-border: #cbd5e1;
+  --color-primary: #1d4ed8;
+  --color-primary-hover: #1e40af;
+  --color-info-bg: #eff6ff;
+  --color-code-bg: #e2e8f0;
+  --color-success-bg: #dcfce7;
+  --color-success-text: #166534;
+  --color-error-bg: #fee2e2;
+  --color-error-text: #991b1b;
+  --font-body: Inter, system-ui, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, monospace;
+  --layout-width: 1120px;
+  --page-gutter: 18px;
+  --space: 24px;
+  --radius-card: 12px;
+  --radius-control: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: 1rem/1.5 var(--font-body);
+}
+
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { line-height: 1.2; }
+h2 { font-size: 1.625rem; }
+h3 { font-size: 1.25rem; }
+a { color: var(--color-primary); }
+button, input { font: inherit; }
+
+.container {
+  width: min(var(--layout-width), calc(100% - 2 * var(--page-gutter)));
+  margin-inline: auto;
+}
+
+.site-header, .site-footer {
+  background: var(--color-surface);
+  border-block-end: 1px solid var(--color-border);
+}
+
+.header-inner, .footer-inner, .brand, .main-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header-inner, .footer-inner {
+  justify-content: space-between;
+  gap: 12px var(--space);
+}
+
+.header-inner { min-height: 72px; }
+
+.brand {
+  gap: 10px;
+  color: var(--color-text);
+  font-size: 1.25rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.brand-mark {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border-radius: var(--radius-control);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  font: 700 1rem var(--font-code);
+}
+
+.main-nav { gap: 4px 16px; }
+.main-nav a { padding-block: 10px; }
+.site-footer { border-block-start: 1px solid var(--color-border); border-block-end: 0; }
+.footer-inner { padding-block: 18px; }
+
+.skip-link {
+  position: absolute;
+  z-index: 1;
+  inset: 8px auto auto 8px;
+  padding: 8px 14px;
+  background: var(--color-surface);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: none; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

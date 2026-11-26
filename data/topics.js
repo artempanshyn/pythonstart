@@ -6,6 +6,8 @@ export const topics = [
     theory: "Знак = присвоює значення змінній. Наприклад, age = 14.",
     task: "Створи змінну x і присвой їй число 5.",
     correctAnswer: "x = 5",
+    example: "age = 14\nprint(age)  # 14",
+    hint: "Запиши ім’я x ліворуч від знака =, а число 5 праворуч.",
   },
   {
     id: "conditions",
@@ -14,6 +16,8 @@ export const topics = [
     theory: "Після умови if ставимо двокрапку. Команди цього блоку пишемо з відступом.",
     task: "Який символ ставимо наприкінці рядка з умовою if x > 0?",
     correctAnswer: ":",
+    example: "if x > 0:\n    print(x)",
+    hint: "Після умови if потрібен розділовий знак.",
   },
   {
     id: "loops",
@@ -22,5 +26,7 @@ export const topics = [
     theory: "У циклі for можна використати range(n). Він дає числа від 0 до n - 1.",
     task: "Запиши виклик range для чисел від 0 до 4 включно.",
     correctAnswer: "range(5)",
+    example: "for i in range(5):\n    print(i)",
+    hint: "range(n) починає з 0 та зупиняється перед n.",
   },
 ];

@@ -1,0 +1,47 @@
+.workspace-section { margin-block: 26px 30px; }
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 8fr);
+  gap: var(--space);
+  margin-top: 14px;
+}
+
+.theory-panel, .exercise-panel {
+  min-width: 0;
+  padding: 18px 20px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.theory-panel > p, .exercise-panel > p { margin-top: 8px; }
+.theory-panel > p { color: var(--color-muted); }
+
+.theory-panel pre {
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: var(--radius-control);
+  background: var(--color-code-bg);
+  font: 0.9375rem/1.4 var(--font-code);
+}
+
+.theory-panel code { font: inherit; }
+.exercise-form { display: grid; gap: 12px; margin-top: 12px; }
+.form-field { display: grid; gap: 4px; }
+
+.form-field label { font-weight: 650; }
+
+.form-field input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--color-muted);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  color: var(--color-text);
+  padding-inline: 12px;
+  font-family: var(--font-code);
+}
+
+.exercise-actions { display: flex; flex-wrap: wrap; gap: 8px; }
