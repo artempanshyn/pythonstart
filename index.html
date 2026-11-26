@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PythonStart - навчальний тренажер</title>
   <link rel="stylesheet" href="css/styles.css">
-  <script type="module" src="js/layout.js"></script>
+  <script type="module" src="js/app.js"></script>
 </head>
 <body id="top">
   <a class="skip-link" href="#main-content">До основного вмісту</a>
@@ -21,6 +21,7 @@
         <a href="#workspace">Вправа</a>
         <a href="#about">Про проєкт</a>
       </nav>
+      <p id="progress-counter" class="progress-pill" role="status" aria-atomic="true"></p>
     </div>
   </header>
 
@@ -33,44 +34,23 @@
 
     <section id="catalog" class="catalog-section" aria-labelledby="catalog-heading">
       <h2 id="catalog-heading">Теми Python</h2>
-      <div id="topics-grid" class="topics-grid">
-        <article class="topic-card">
-          <h3>Змінні</h3>
-          <p>Зберігай числа й текст та використовуй їх у коді.</p>
-          <a class="btn btn-primary" href="#workspace" data-topic="variables" aria-current="true">Перейти до теми
-            <span class="visually-hidden">«Змінні»</span>
-          </a>
-        </article>
-        <article class="topic-card">
-          <h3>Умови</h3>
-          <p>Обирай дію залежно від того, чи виконується умова.</p>
-          <a class="btn btn-primary" href="#workspace" data-topic="conditions">Перейти до теми
-            <span class="visually-hidden">«Умови»</span>
-          </a>
-        </article>
-        <article class="topic-card">
-          <h3>Цикли</h3>
-          <p>Повторюй дії кілька разів за допомогою циклу.</p>
-          <a class="btn btn-primary" href="#workspace" data-topic="loops">Перейти до теми
-            <span class="visually-hidden">«Цикли»</span>
-          </a>
-        </article>
-      </div>
+      <div id="topics-grid" class="topics-grid"></div>
+      <noscript>Увімкни JavaScript, щоб відкрити теми та перевіряти відповіді.</noscript>
     </section>
 
     <section id="workspace" class="workspace-section" aria-labelledby="lesson-heading">
-      <h2 id="lesson-heading" tabindex="-1">Змінні та типи даних</h2>
+      <h2 id="lesson-heading" tabindex="-1"></h2>
       <div class="workspace-grid">
         <article class="theory-panel" aria-labelledby="theory-heading">
           <h3 id="theory-heading">Коротка теорія</h3>
-          <p id="lesson-theory">Знак = присвоює значення змінній. Наприклад, age = 14.</p>
-          <pre><code id="lesson-code">age = 14
-print(age)  # 14</code></pre>
+          <p id="lesson-theory"></p>
+          <pre><code id="lesson-code"></code></pre>
+          <p id="lesson-tip"></p>
         </article>
 
         <article class="exercise-panel" aria-labelledby="exercise-heading">
           <h3 id="exercise-heading">Вправа</h3>
-          <p id="exercise-question">Створи змінну x і присвой їй число 5.</p>
+          <p id="exercise-question"></p>
           <form id="exercise-form" class="exercise-form" novalidate>
             <div class="form-field">
               <label for="user-answer">Твоя відповідь</label>
