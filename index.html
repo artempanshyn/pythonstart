@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PythonStart - навчальний тренажер</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/layout.js"></script>
+</head>
+<body id="top">
+  <a class="skip-link" href="#main-content">До основного вмісту</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">&lt;&gt;</span>
+        PythonStart
+      </a>
+      <nav class="main-nav" aria-label="Головна навігація">
+        <a href="#catalog">Теми</a>
+        <a href="#workspace">Вправа</a>
+        <a href="#about">Про проєкт</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container" tabindex="-1">
+    <section class="hero-section" aria-labelledby="hero-heading">
+      <h1 id="hero-heading">Вивчай Python крок за кроком</h1>
+      <p>Коротка теорія, приклад коду та вправа з перевіркою.</p>
+      <a class="btn btn-primary" href="#catalog">Почати навчання</a>
+    </section>
+
+    <section id="catalog" class="catalog-section" aria-labelledby="catalog-heading">
+      <h2 id="catalog-heading">Теми Python</h2>
+      <div id="topics-grid" class="topics-grid">
+        <article class="topic-card">
+          <h3>Змінні</h3>
+          <p>Зберігай числа й текст та використовуй їх у коді.</p>
+          <a class="btn btn-primary" href="#workspace" data-topic="variables" aria-current="true">Перейти до теми
+            <span class="visually-hidden">«Змінні»</span>
+          </a>
+        </article>
+        <article class="topic-card">
+          <h3>Умови</h3>
+          <p>Обирай дію залежно від того, чи виконується умова.</p>
+          <a class="btn btn-primary" href="#workspace" data-topic="conditions">Перейти до теми
+            <span class="visually-hidden">«Умови»</span>
+          </a>
+        </article>
+        <article class="topic-card">
+          <h3>Цикли</h3>
+          <p>Повторюй дії кілька разів за допомогою циклу.</p>
+          <a class="btn btn-primary" href="#workspace" data-topic="loops">Перейти до теми
+            <span class="visually-hidden">«Цикли»</span>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="workspace" class="workspace-section" aria-labelledby="lesson-heading">
+      <h2 id="lesson-heading" tabindex="-1">Змінні та типи даних</h2>
+      <div class="workspace-grid">
+        <article class="theory-panel" aria-labelledby="theory-heading">
+          <h3 id="theory-heading">Коротка теорія</h3>
+          <p id="lesson-theory">Знак = присвоює значення змінній. Наприклад, age = 14.</p>
+          <pre><code id="lesson-code">age = 14
+print(age)  # 14</code></pre>
+        </article>
+
+        <article class="exercise-panel" aria-labelledby="exercise-heading">
+          <h3 id="exercise-heading">Вправа</h3>
+          <p id="exercise-question">Створи змінну x і присвой їй число 5.</p>
+          <form id="exercise-form" class="exercise-form" novalidate>
+            <div class="form-field">
+              <label for="user-answer">Твоя відповідь</label>
+              <input id="user-answer" name="answer" type="text"
+                aria-describedby="exercise-question" autocomplete="off"
+                autocapitalize="off" spellcheck="false" required>
+            </div>
+            <div class="exercise-actions">
+              <button type="submit" id="check-btn" class="btn btn-primary">Перевірити відповідь</button>
+              <button type="button" id="hint-btn" class="btn btn-secondary"
+                aria-controls="exercise-hint" aria-expanded="false">Показати підказку</button>
+            </div>
+          </form>
+          <p id="exercise-hint" class="feedback" data-state="hint" hidden></p>
+          <p id="feedback-container" class="feedback" role="status" aria-atomic="true"></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="about" class="site-footer">
+    <div class="container footer-inner">
+      <p>PythonStart - навчальний тренажер з основ Python.</p>
+      <a href="#top">До початку сторінки</a>
+    </div>
+  </footer>
+</body>
+</html>

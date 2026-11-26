@@ -4,6 +4,8 @@ export const messages = {
   "catalog.heading": "Каталог навчальних тем",
   "catalog.empty": "Навчальні теми тимчасово відсутні.",
   "catalog.openTopic": "Перейти до теми",
+  "exercise.showHint": "Показати підказку",
+  "exercise.hideHint": "Сховати підказку",
   "exercise.checkBtn": "Перевірити відповідь",
   "exercise.placeholder": "Введи відповідь",
   "exercise.emptyWarning": "Введи або обери відповідь перед перевіркою.",
