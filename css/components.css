@@ -27,6 +27,27 @@
 
 .btn-secondary:hover { background: var(--color-info-bg); }
 
+.progress-pill, .topic-status {
+  border-radius: var(--radius-control);
+  padding: 4px 10px;
+  font-size: 0.875rem;
+  font-weight: 650;
+}
+
+.progress-pill {
+  background: var(--color-info-bg);
+  color: var(--color-primary-hover);
+}
+
+.progress-pill:empty { visibility: hidden; }
+
+.topic-card .topic-status {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+}
+
+.topic-step { font-size: 0.875rem; }
+
 :focus-visible {
   outline: 3px solid var(--color-primary);
   outline-offset: 3px;

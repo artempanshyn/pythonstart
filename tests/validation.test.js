@@ -41,7 +41,7 @@ for (const [name, input, expected, status] of cases) {
 test("три теми мають окремі ідентифікатори й перевірювані еталони", () => {
   assert.deepEqual(topics.map(({ id }) => id), ["variables", "conditions", "loops"]);
   for (const topic of topics) {
-    for (const field of ["title", "description", "theory", "task", "correctAnswer"]) {
+    for (const field of ["stepLabel", "title", "description", "theory", "codeExample", "tip", "task", "hint", "correctAnswer"]) {
       assert.ok(topic[field].trim(), `${topic.id}: ${field}`);
     }
     assert.equal(validateExerciseAnswer(topic.correctAnswer, topic.correctAnswer).status, "success");
