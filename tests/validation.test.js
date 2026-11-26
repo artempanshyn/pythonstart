@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { topics } from "../data/topics.js";
 import { t } from "../js/i18n.js";
-import { validateExerciseAnswer } from "../js/validation.js";
+import { diagnoseStudentMistake, validateExerciseAnswer } from "../js/validation.js";
 
 const expectedKeys = {
   empty: "exercise.emptyWarning",
@@ -38,8 +38,8 @@ for (const [name, input, expected, status] of cases) {
   });
 }
 
-test("три теми мають окремі ідентифікатори й перевірювані еталони", () => {
-  assert.deepEqual(topics.map(({ id }) => id), ["variables", "conditions", "loops"]);
+test("чотири теми мають окремі ідентифікатори й перевірювані еталони", () => {
+  assert.deepEqual(topics.map(({ id }) => id), ["variables", "conditions", "loops", "lists"]);
   for (const topic of topics) {
     for (const field of ["stepLabel", "title", "description", "theory", "codeExample", "tip", "task", "hint", "correctAnswer"]) {
       assert.ok(topic[field].trim(), `${topic.id}: ${field}`);
@@ -47,6 +47,32 @@ test("три теми мають окремі ідентифікатори й п
     assert.equal(validateExerciseAnswer(topic.correctAnswer, topic.correctAnswer).status, "success");
   }
 });
+
+const diagnostics = [
+  ["команда print замість результату", " print(15) ", "15", "print"],
+  ["порожня команда без еталона", "print()", "", null],
+  ["зайві парні лапки", '"15"', "15", "extraQuotes"],
+  ["пропущені парні лапки", "Привіт", "'Привіт'", "missingQuotes"],
+  ["різний регістр", "PRINT", "print", "case"],
+  ["одиниця менше", "14", "15", "offByOne"],
+  ["одиниця більше", "+16", "15", "offByOne"],
+  ["великі сусідні цілі", "9007199254740993", "9007199254740992", "offByOne"],
+  ["великі числа з більшою різницею", "9007199254740995", "9007199254740992", null],
+  ["нормалізована правильна відповідь", "range ( 5 )", "range(5)", null],
+  ["невідома відповідь", "12.5", "15", null],
+  ["відсутні або порожні значення", null, undefined, null],
+];
+
+for (const [name, input, expected, hint] of diagnostics) {
+  test(`діагностика: ${name}`, () => {
+    const key = hint && `exercise.diagnostic.${hint}`;
+    assert.equal(diagnoseStudentMistake(input, expected), key);
+    if (key) {
+      assert.notEqual(t(key), key);
+      assert.equal(validateExerciseAnswer(input, expected).isCorrect, false);
+    }
+  });
+}
 
 test("невідомий ключ і успадкована властивість лишаються ключами", () => {
   assert.equal(t("exercise.unknown"), "exercise.unknown");

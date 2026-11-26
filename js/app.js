@@ -1,5 +1,5 @@
 import { t } from "./i18n.js";
-import { loadProgress, markTopicAsCompleted, saveProgress } from "./storage.js";
+import { loadProgress, markTopicAsCompleted, resetProgress, saveProgress } from "./storage.js";
 import { getTopicById, renderTopicsCatalog } from "./topics.js";
 import { validateExerciseAnswer } from "./validation.js";
 import { createWorkspace } from "./workspace.js";
@@ -15,6 +15,9 @@ export const APP_CONFIG = {
 export function initApp(root = document) {
   const feedback = root.querySelector("#feedback-container");
   const counter = root.querySelector("#progress-counter");
+  const resetButton = root.querySelector("#reset-progress-btn");
+  const resetDialog = root.querySelector("#reset-progress-dialog");
+  const resetFeedback = root.querySelector("#progress-reset-feedback");
   let progress = loadProgress();
   let saved = true;
 
@@ -37,7 +40,11 @@ export function initApp(root = document) {
       ? progress
       : { ...progress, activeTopicId: topic.id };
     persist(nextProgress);
-    showTopic(topic, true);
+    showLesson(topic, true);
+  }
+
+  function showLesson(topic, focus = false) {
+    showTopic(topic, focus);
     feedback.textContent = "";
     delete feedback.dataset.state;
   }
@@ -50,10 +57,30 @@ export function initApp(root = document) {
     return result;
   }
 
-  const updateCatalog = renderTopicsCatalog(root.querySelector("#topics-grid"), selectTopic);
+  const updateCatalog = renderTopicsCatalog(root.querySelector("#catalog"), selectTopic);
   const showTopic = createWorkspace(root.querySelector("#workspace"), checkAnswer);
-  showTopic(getTopicById(progress.activeTopicId));
+  showLesson(getTopicById(progress.activeTopicId));
   refreshProgress();
+
+  resetButton.addEventListener("click", () => {
+    resetFeedback.textContent = "";
+    resetDialog.showModal();
+  });
+
+  resetDialog.querySelector("form").addEventListener("submit", (event) => {
+    if (event.submitter?.value !== "reset") return;
+    if (!resetProgress()) {
+      resetFeedback.textContent = t("progress.resetFailed");
+      return;
+    }
+
+    progress = loadProgress();
+    saved = true;
+    refreshProgress();
+    showLesson(getTopicById(progress.activeTopicId));
+    resetFeedback.textContent = t("progress.resetDone");
+  });
+
   initApiWidget(root.querySelector("#api-explorer"));
 }
 

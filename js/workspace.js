@@ -1,4 +1,5 @@
 import { t } from "./i18n.js";
+import { diagnoseStudentMistake } from "./validation.js";
 
 export function createWorkspace(section, onSubmitAnswer) {
   const heading = section.querySelector("#lesson-heading");
@@ -10,7 +11,12 @@ export function createWorkspace(section, onSubmitAnswer) {
   const answer = section.querySelector("#user-answer");
   const hint = section.querySelector("#exercise-hint");
   const hintButton = section.querySelector("#hint-btn");
+  const diagnostic = section.querySelector("#answer-diagnostic");
   let topic;
+
+  function showDiagnostic(key) {
+    diagnostic.textContent = key ? t(key) : "";
+  }
 
   function setHintVisible(visible) {
     hint.hidden = !visible;
@@ -24,9 +30,13 @@ export function createWorkspace(section, onSubmitAnswer) {
     event.preventDefault();
     const result = onSubmitAnswer(answer.value, topic);
     answer.setAttribute("aria-invalid", String(!result.isCorrect));
+    showDiagnostic(result.status === "error" ? diagnoseStudentMistake(answer.value, topic.correctAnswer) : null);
   });
 
-  answer.addEventListener("input", () => answer.removeAttribute("aria-invalid"));
+  answer.addEventListener("input", () => {
+    answer.removeAttribute("aria-invalid");
+    showDiagnostic(null);
+  });
 
   return function showTopic(nextTopic, focus = false) {
     topic = nextTopic;
@@ -38,6 +48,7 @@ export function createWorkspace(section, onSubmitAnswer) {
     hint.textContent = topic.hint;
     form.reset();
     answer.removeAttribute("aria-invalid");
+    showDiagnostic(null);
     setHintVisible(false);
     if (focus) heading.focus({ preventScroll: true });
   };
