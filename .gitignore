@@ -8,6 +8,10 @@ __pycache__/
 venv/
 env/
 
+# Залежності Node.js та звіти покриття
+node_modules/
+coverage/
+
 # Налаштування редакторів коду та ОС
 .vscode/
 .idea/
