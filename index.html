@@ -19,6 +19,7 @@
       <nav class="main-nav" aria-label="Головна навігація">
         <a href="#catalog">Теми</a>
         <a href="#workspace">Вправа</a>
+        <a href="#api-explorer">Порада з API</a>
         <a href="#about">Про проєкт</a>
       </nav>
       <p id="progress-counter" class="progress-pill" role="status" aria-atomic="true"></p>
@@ -67,6 +68,30 @@
           <p id="exercise-hint" class="feedback" data-state="hint" hidden></p>
           <p id="feedback-container" class="feedback" role="status" aria-atomic="true"></p>
         </article>
+      </div>
+    </section>
+    <section id="api-explorer" class="api-section" data-state="loading" aria-labelledby="api-heading">
+      <div class="api-header">
+        <div>
+          <h2 id="api-heading">Скарбничка Python-розробника (REST API)</h2>
+          <p id="api-source-badge" class="api-badge" role="status"></p>
+        </div>
+        <div class="api-controls">
+          <button type="button" id="next-tip-btn" class="btn btn-primary" disabled>Інша порада з API</button>
+          <button type="button" id="simulate-error-btn" class="btn btn-secondary" disabled>Тест помилки 404</button>
+        </div>
+      </div>
+      <p id="api-error-banner" class="feedback" data-state="error" role="alert" hidden></p>
+      <div class="api-skeleton" aria-hidden="true"></div>
+      <article id="api-tip-content" class="api-tip" aria-labelledby="api-tip-title" aria-live="polite" hidden>
+        <p id="api-tip-category"></p>
+        <h3 id="api-tip-title"></h3>
+        <p id="api-tip-text"></p>
+        <pre><code id="api-tip-code"></code></pre>
+      </article>
+      <div class="api-repo">
+        <p id="api-repo-stats"></p>
+        <a id="api-repo-link" href="https://github.com/python/cpython" target="_blank" rel="noopener noreferrer">Офіційний репозиторій Python</a>
       </div>
     </section>
   </main>
