@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-11-26",
+  "tips": [
+    {
+      "id": "tip-fstrings",
+      "category": "Рядки",
+      "title": "Форматуй рядки за допомогою f-рядків",
+      "explanation": "Постав f перед лапками й помісти змінну у фігурні дужки. Python підставить її значення в рядок.",
+      "codeSnippet": "name = \"Олена\"\nscore = 20\nprint(f\"{name} набрала {score} балів\")"
+    },
+    {
+      "id": "tip-enumerate",
+      "category": "Цикли",
+      "title": "Нумеруй елементи через enumerate()",
+      "explanation": "enumerate() повертає номер і значення елемента на кожному кроці циклу. Параметр start=1 починає нумерацію з одиниці.",
+      "codeSnippet": "topics = [\"Змінні\", \"Умови\", \"Цикли\"]\nfor number, title in enumerate(topics, start=1):\n    print(number, title)"
+    },
+    {
+      "id": "tip-swap",
+      "category": "Змінні",
+      "title": "Обмінюй значення в одному рядку",
+      "explanation": "У присвоєнні a, b = b, a Python спочатку обчислює праву частину, а потім присвоює значення змінним зліва.",
+      "codeSnippet": "a = 5\nb = 10\na, b = b, a\nprint(a, b)  # 10 5"
+    },
+    {
+      "id": "tip-in-operator",
+      "category": "Умови",
+      "title": "Перевіряй входження оператором in",
+      "explanation": "Оператор in повертає True, якщо список містить потрібний елемент. У рядку він перевіряє входження підрядка.",
+      "codeSnippet": "allowed = [\"print\", \"input\", \"range\"]\nif \"print\" in allowed:\n    print(\"Команда дозволена\")"
+    }
+  ]
+}

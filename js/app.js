@@ -4,6 +4,7 @@ import { getTopicById, renderTopicsCatalog } from "./topics.js";
 import { validateExerciseAnswer } from "./validation.js";
 import { createWorkspace } from "./workspace.js";
 import { topics } from "../data/topics.js";
+import { initApiWidget } from "./apiWidget.js";
 
 export const APP_CONFIG = {
   appName: "PythonStart",
@@ -53,6 +54,7 @@ export function initApp(root = document) {
   const showTopic = createWorkspace(root.querySelector("#workspace"), checkAnswer);
   showTopic(getTopicById(progress.activeTopicId));
   refreshProgress();
+  initApiWidget(root.querySelector("#api-explorer"));
 }
 
 if (typeof document !== "undefined") document.addEventListener("DOMContentLoaded", () => initApp());
