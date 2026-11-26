@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>PythonStart - навчальний тренажер</title>
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="css/styles.css">
   <script type="module" src="js/app.js"></script>
 </head>
@@ -22,9 +23,24 @@
         <a href="#api-explorer">Порада з API</a>
         <a href="#about">Про проєкт</a>
       </nav>
-      <p id="progress-counter" class="progress-pill" role="status" aria-atomic="true"></p>
+      <div class="header-progress">
+        <p id="progress-counter" class="progress-pill" role="status" aria-atomic="true"></p>
+        <button type="button" id="reset-progress-btn" class="btn btn-secondary" aria-haspopup="dialog">Скинути прогрес</button>
+        <p id="progress-reset-feedback" role="status"></p>
+      </div>
     </div>
   </header>
+
+  <dialog id="reset-progress-dialog" class="reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <form method="dialog">
+      <h2 id="reset-title">Скинути прогрес?</h2>
+      <p id="reset-description">Бали й позначки опрацьованих тем у цьому браузері буде видалено.</p>
+      <div class="reset-actions">
+        <button type="submit" value="cancel" class="btn btn-secondary" autofocus>Скасувати</button>
+        <button type="submit" value="reset" class="btn btn-primary">Скинути</button>
+      </div>
+    </form>
+  </dialog>
 
   <main id="main-content" class="container" tabindex="-1">
     <section class="hero-section" aria-labelledby="hero-heading">
@@ -35,7 +51,20 @@
 
     <section id="catalog" class="catalog-section" aria-labelledby="catalog-heading">
       <h2 id="catalog-heading">Теми Python</h2>
+      <div class="catalog-controls">
+        <div class="form-field catalog-search">
+          <label for="topic-search-input">Пошук тем</label>
+          <input id="topic-search-input" type="search" placeholder="Назва або опис теми" autocomplete="off">
+        </div>
+        <fieldset class="catalog-filters">
+          <legend>Стан теми</legend>
+          <label><input class="visually-hidden" type="radio" name="topic-status" value="all" checked><span>Усі</span></label>
+          <label><input class="visually-hidden" type="radio" name="topic-status" value="completed"><span>Опрацьовані</span></label>
+          <label><input class="visually-hidden" type="radio" name="topic-status" value="pending"><span>Неопрацьовані</span></label>
+        </fieldset>
+      </div>
       <div id="topics-grid" class="topics-grid"></div>
+      <p id="catalog-empty" class="catalog-empty" role="status"></p>
       <noscript>Увімкни JavaScript, щоб відкрити теми та перевіряти відповіді.</noscript>
     </section>
 
@@ -67,6 +96,7 @@
           </form>
           <p id="exercise-hint" class="feedback" data-state="hint" hidden></p>
           <p id="feedback-container" class="feedback" role="status" aria-atomic="true"></p>
+          <p id="answer-diagnostic" class="feedback" data-state="hint" role="status"></p>
         </article>
       </div>
     </section>
