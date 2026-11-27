@@ -16,10 +16,15 @@ const REQUIRED_FILES = [
   "js/storage.js",
   "docs/architecture.md",
   "docs/code-review-and-qa.md",
+  "docs/ci-cd-pipeline.md",
+  "docs/user-guide.md",
+  "docs/release-notes-v1.0.0.md",
+  "CHANGELOG.md",
 ];
 const JS_DIRECTORIES = ["data", "js", "tests"];
 const CONFLICT_MARKER = /^(?:(?:<{7}|>{7}|\|{7})(?:\s|$)|={7}\s*$)/m;
 const EVAL_CALL = /\beval\s*\(/;
+const RELEASE_VERSION = "1.0.0";
 const errors = [];
 
 function* javascriptFiles(directory) {
@@ -39,6 +44,15 @@ for (const path of REQUIRED_FILES) {
     const reason = error.code === "ENOENT" ? "Відсутній обов’язковий файл" : "Файл не читається";
     errors.push(`[СТРУКТУРА] ${reason}: ${path}`);
   }
+}
+
+try {
+  const manifest = JSON.parse(readFileSync(join(ROOT, "package.json"), "utf8"));
+  if (manifest?.version !== RELEASE_VERSION) {
+    errors.push(`[РЕЛІЗ] Очікувана версія ${RELEASE_VERSION}, знайдена: ${manifest?.version ?? "не вказана"}`);
+  }
+} catch (error) {
+  errors.push(`[РЕЛІЗ] Не вдалося прочитати версію з package.json: ${error.message}`);
 }
 
 for (const directory of JS_DIRECTORIES) {

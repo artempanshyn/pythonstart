@@ -1,6 +1,8 @@
-# Навчальний тренажер PythonStart
+# Навчальний вебтренажер PythonStart v1.0.0
 
-[![PythonStart CI Pipeline](https://github.com/artempanshyn/pythonstart/actions/workflows/ci.yml/badge.svg?branch=ci%2F13-github-actions-setup&event=push)](https://github.com/artempanshyn/pythonstart/actions/workflows/ci.yml)
+[![PythonStart CI Pipeline](https://github.com/artempanshyn/pythonstart/actions/workflows/ci.yml/badge.svg?branch=release%2F14-pythonstart&event=push)](https://github.com/artempanshyn/pythonstart/actions/workflows/ci.yml)
+
+[Відкрити тренажер](https://artempanshyn.github.io/pythonstart/) · [Випуск v1.0.0](https://github.com/artempanshyn/pythonstart/releases/tag/v1.0.0) · [Інструкція для учнів і вчителів](docs/user-guide.md)
 
 ## 1. Загальна інформація
 
@@ -19,7 +21,9 @@ PythonStart - навчальний проєкт з освітнього комп
 
 ## 4. Мета та межі першої версії
 
-Перший навчальний сценарій охоплює теми «Змінні», «Умови», «Цикли» та «Списки». Учень обирає тему з каталогу, читає коротке пояснення, виконує вправу й одразу отримує результат перевірки. Реєстрацію, серверну базу даних та інтеграцію з електронним журналом відкладено.
+Перший навчальний сценарій охоплює теми «Змінні», «Умови», «Цикли» та «Списки». Учень обирає тему з каталогу або знаходить її пошуком, читає пояснення, вводить відповідь і бачить відгук. На тему припадає 10 балів. Прогрес зберігається у браузері. Віджет порад використовує JSON і GitHub REST API, а за відмови основного джерела доступна резервна порада.
+
+Тренажер перевіряє короткі відповіді. Для запуску довільного коду Python потрібне окреме середовище. Прогрес прив’язано до браузера, облікових записів та синхронізації між пристроями немає.
 
 [Специфікація вимог, User Stories, MoSCoW і межі MVP](docs/requirements.md)
 
@@ -27,7 +31,7 @@ PythonStart - навчальний проєкт з освітнього комп
 
 [Модульна архітектура та перевірка](docs/architecture.md)
 
-Вебінтерфейс запускається з кореня репозиторію командою `python3 -m http.server 5500 --bind 127.0.0.1`. Відкрийте http://127.0.0.1:5500/ у браузері. Для перевірки модулів у Node.js виконайте `npm ci`, потім `npm test`. Команда `npm run test:watch` перезапускає тести при зміні файлів.
+Стек вебверсії - HTML, CSS і JavaScript ES Modules. npm встановлює Vitest, а GitHub Actions запускає лінтер і тести. GitHub Pages публікує статичні файли.
 
 ## 5. Організація роботи
 
@@ -35,15 +39,22 @@ PythonStart - навчальний проєкт з освітнього комп
 
 ## 6. Структура проєкту та інструкція із запуску
 
-- `src/main.py` - головний файл запуску тренажера.
-- `src/math_quiz.py` - перевірка відповідей і підрахунок балів.
-- `docs/` - методичні матеріали та документація проєкту.
+| Шлях | Вміст |
+| --- | --- |
+| `index.html`, `css/` | Вебсторінка та стилі |
+| `js/`, `data/` | Каталог, вправи, прогрес, API і навчальні матеріали |
+| `tests/`, `scripts/` | Vitest і статичні перевірки |
+| `.github/` | GitHub Actions і шаблон Pull Request |
+| `docs/`, `CHANGELOG.md` | Документація і журнал змін |
+| `src/` | Консольний прототип раннього етапу |
 
-Для запуску виконайте з кореня репозиторію:
+Запустіть вебверсію з кореня репозиторію:
 
 ```bash
-python3 src/main.py
+python3 -m http.server 5500 --bind 127.0.0.1
 ```
+
+Відкрийте http://127.0.0.1:5500/ у браузері. Консольний прототип можна запустити окремо командою `python3 src/main.py`.
 
 ## 7. Організація командної роботи
 
@@ -63,4 +74,8 @@ python3 src/main.py
 
 ## 8. Автоматизована перевірка
 
-Після `npm ci` виконайте `npm run lint` для статичного аналізу, `npm test` для Vitest або `npm run ci:check` для обох перевірок. Бейдж показує результат CI для робочої гілки ЛР 13. Деталі запуску та правила злиття описані у [регламенті CI](docs/ci-cd-pipeline.md).
+Після `npm ci` виконайте `npm run lint` для статичного аналізу, `npm test` для Vitest або `npm run ci:check` для обох перевірок. `npm run test:watch` повторює тести після змін. Бейдж показує результат CI для релізної гілки.
+
+- [Регламент CI](docs/ci-cd-pipeline.md) і [Code Review](docs/code-review-and-qa.md).
+- [Контракт даних](docs/data-contract.md) і [журнал ШІ](docs/ai-usage-log.md).
+- [Паспорт релізу і Smoke Test](docs/release-notes-v1.0.0.md) та [журнал змін](CHANGELOG.md).

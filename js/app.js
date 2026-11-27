@@ -8,7 +8,7 @@ import { initApiWidget } from "./apiWidget.js";
 
 export const APP_CONFIG = {
   appName: "PythonStart",
-  version: "1.0.0-mvp",
+  version: "1.0.0",
   defaultLocale: "uk",
 };
 
