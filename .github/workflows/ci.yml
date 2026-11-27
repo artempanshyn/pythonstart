@@ -5,10 +5,12 @@ on:
     branches:
       - main
       - ci/13-github-actions-setup
+      - release/14-pythonstart
   pull_request:
     branches:
       - main
       - fix/topics-safe-filter-and-stats
+      - ci/13-github-actions-setup
 
 permissions:
   contents: read
