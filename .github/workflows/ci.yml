@@ -11,6 +11,7 @@ on:
       - main
       - fix/topics-safe-filter-and-stats
       - ci/13-github-actions-setup
+      - release/14-pythonstart
 
 permissions:
   contents: read

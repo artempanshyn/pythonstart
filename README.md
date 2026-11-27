@@ -79,3 +79,10 @@ python3 -m http.server 5500 --bind 127.0.0.1
 - [Регламент CI](docs/ci-cd-pipeline.md) і [Code Review](docs/code-review-and-qa.md).
 - [Контракт даних](docs/data-contract.md) і [журнал ШІ](docs/ai-usage-log.md).
 - [Паспорт релізу і Smoke Test](docs/release-notes-v1.0.0.md) та [журнал змін](CHANGELOG.md).
+
+## 9. Demo Day і матеріали для школи
+
+- [Сценарій Demo Day і план Б](docs/demo-day-pitch.md).
+- [Ретроспектива та план дій](docs/retrospective.md).
+- [Методичний паспорт для 9 класу](docs/methodical-passport.md).
+- [Рубрика й картки підтримки](docs/school-rubrics-and-scaffolding.md).
