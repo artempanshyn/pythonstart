@@ -16,7 +16,6 @@ const REQUIRED_FILES = [
   "js/storage.js",
   "docs/architecture.md",
   "docs/code-review-and-qa.md",
-  "js/non-existent-file.js",
 ];
 const JS_DIRECTORIES = ["data", "js", "tests"];
 const CONFLICT_MARKER = /^(?:(?:<{7}|>{7}|\|{7})(?:\s|$)|={7}\s*$)/m;
