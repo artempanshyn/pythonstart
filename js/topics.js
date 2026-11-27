@@ -6,19 +6,31 @@ export function getTopicById(id) {
 }
 
 function normalizeSearch(text) {
-  return text.normalize().toLocaleLowerCase("uk");
+  return text.normalize().toLocaleLowerCase("uk").trim().replace(/\s+/g, " ");
 }
 
 export function filterTopicsData(items, { filter = "all", searchQuery = "", completedTopics = [] } = {}) {
   if (!Array.isArray(items)) return [];
 
-  const query = typeof searchQuery === "string" ? normalizeSearch(searchQuery.trim()) : "";
-  const completed = new Set(completedTopics);
+  const query = typeof searchQuery === "string" ? normalizeSearch(searchQuery) : "";
+  const completed = new Set(Array.isArray(completedTopics) ? completedTopics : []);
   return items.filter((topic) => {
     const isCompleted = completed.has(topic.id);
     if ((filter === "completed" && !isCompleted) || (filter === "pending" && isCompleted)) return false;
     return normalizeSearch(`${topic.title} ${topic.description}`).includes(query);
   });
+}
+
+export function getCatalogStats(items, completedTopics = []) {
+  const total = Array.isArray(items) ? items.length : 0;
+  const completed = filterTopicsData(items, { filter: "completed", completedTopics }).length;
+
+  return {
+    total,
+    completed,
+    remaining: total - completed,
+    percent: total ? Math.round((completed / total) * 100) : 0,
+  };
 }
 
 export function renderTopicsCatalog(section, onSelectTopic) {

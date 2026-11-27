@@ -1,6 +1,6 @@
 import { t } from "./i18n.js";
 import { loadProgress, markTopicAsCompleted, resetProgress, saveProgress } from "./storage.js";
-import { getTopicById, renderTopicsCatalog } from "./topics.js";
+import { getCatalogStats, getTopicById, renderTopicsCatalog } from "./topics.js";
 import { validateExerciseAnswer } from "./validation.js";
 import { createWorkspace } from "./workspace.js";
 import { topics } from "../data/topics.js";
@@ -23,7 +23,8 @@ export function initApp(root = document) {
 
   function refreshProgress() {
     const { completedTopics, totalScore } = progress;
-    const status = `${completedTopics.length} / ${topics.length} (${totalScore} ${t("progress.points")})`;
+    const { completed, total } = getCatalogStats(topics, completedTopics);
+    const status = `${completed} / ${total} (${totalScore} ${t("progress.points")})`;
     counter.textContent = saved ? status : `${status} · ${t("progress.unsaved")}`;
     updateCatalog(progress);
   }
