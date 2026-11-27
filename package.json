@@ -5,8 +5,10 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "lint": "node scripts/lint-check.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "ci:check": "npm run lint && npm test"
   },
   "devDependencies": {
     "vitest": "4.1.12"
